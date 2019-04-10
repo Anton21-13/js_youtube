@@ -106,5 +106,53 @@ more.addEventListener('click', () => {
     setTimeout(() => {
       card.classList.remove('videos__item-active');
     }, 60);
+
+    bindNewModal(card);
   }
+
+  sliceTitle('.videos__item-descr', 100);
+
 });
+
+function sliceTitle(selector, count) {
+  document.querySelectorAll(selector).forEach(item => {
+    item.textContent.trim();
+
+    if (item.textContent.length < count) {
+      return;
+    } else {
+      const str = item.textContent.slice(0, count + 1) + '...';
+      item.textContent = str;
+    }
+  });
+}
+sliceTitle('.videos__item-descr', 100);
+
+function openModal() {
+  modal.style.display = 'block';
+}
+
+function closeModal() {
+  modal.style.display = 'none';
+}
+
+function bindModal(cards) {
+  cards.forEach(item => {
+    item.addEventListener('click', (event) => {
+      event.preventDefault();
+      openModal();
+    });
+  });
+}
+
+bindModal(videos);
+
+function bindNewModal(cards) {
+  cards.addEventListener('click', (event) => {
+    event.preventDefault();
+    openModal();
+  });
+}
+
+
+
